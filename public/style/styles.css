@@ -26,39 +26,47 @@ h1 {
 }
 
 .item {
-  min-height: 70px;
+  min-height: 50px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #F1F1F1;
+  margin: 0px;
+  border-top: 1px solid #fff;
 }
 
 .item:last-child {
   border-bottom: 0;
 }
 
-input:checked+p {
+input[type="checkbox"]:checked , .content{
+  background-color: #E4E9FD;
+}
+
+input[type="checkbox"]:checked+p{
   text-decoration: line-through;
   text-decoration-color: #A683E3;
+  background-color: #dcd1e363;
 }
 
 input[type="checkbox"] {
-  margin: 20px;
+  margin: auto 20px;
 }
 
 p {
   margin: 0;
+  display: flex;
   padding: 20px;
   font-size: 20px;
   font-weight: 200;
   color: #00204a;
+  width: 250px;
+  word-break: break-all;
 }
 
 form {
   text-align: center;
-  margin-left: 20px;
 }
 
-button {
+.add {
   min-height: 50px;
   width: 50px;
   border-radius: 50%;
@@ -67,8 +75,21 @@ button {
   color: #fff;
   font-size: 30px;
   padding-bottom: 6px;
+  outline: none;
   border-width: 0;
 }
+
+.crossbutton {
+  border: none;
+  height: 30px;
+  margin: auto 20px;
+  padding: 0px;
+  display: flex;
+  font-size: 30px;
+  color: #baa5c4;
+  background-color: #E4E9FD;
+  outline: none;
+ }
 
 input[type="text"] {
   text-align: center;

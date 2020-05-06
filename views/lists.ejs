@@ -1,4 +1,6 @@
-<!-- This include function is used to include the header.ejs template in our code -->
+<!-- This include function is used to include the header.ejs template in our code
+      <button class="crossbutton" type="submit" name="delete" value=<%= listTitle %>>*</button>
+     -->
 <%- include("header") -%>
 
 <div class="box" id="heading">
@@ -12,15 +14,18 @@
       <li>Eat Food</li> -->
 <!-- here same code is used for making more list items with single list using java script code in background.-->
   <% for (var i = 0; i < todo_Data.length; i++){ %>
-  <div class="item">
-    <input type="checkbox">
-    <p> <%= todo_Data[i] %></p>
-  </div>
-  <% } %>
-
+    <div class="item content">
+      <form action="/del" method="post" style="display:flex;">
+        <input type="checkbox" class="cbox">
+        <p name="text"><%= todo_Data[i] %></p>
+        <button class="crossbutton" type="submit" name="delete" value=<%= listTitle %>>×</button>
+      </form>
+    </div>
+    <%} %>
+  <!-- <button type="submit" name="check_button" class="crossbutton" value=<%= listTitle %>></button> -->
   <form class="item" action="/" method="post">
     <input type="text" name="Todo_Item" placeholder="New Item" autocomplete="off" autofocus>
-    <button type="submit" name="button" value=<%= listTitle %>>+</button>
+    <button class="add" type="submit" name="button" value=<%= listTitle %>>+</button>
   </form>
 </div>
 
