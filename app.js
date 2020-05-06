@@ -3,13 +3,15 @@
 // At first we acquire some packages to use to use in this file. so first acquire EXPRESS BODY-PARSER in our code
 const express = require("express");
 const bodyParser = require("body-parser");
- 
+const date = require(__dirname + "/davm.js");
 // use express in our code. so initialize app to acquire express.
 const app = express();
 
 // made an item list array for main list menu and work array for work list menu
-let items = ["Buy Food", "Cook Food", "Eat Food"];
-let workItem = [];
+// we force you to read docs of const array.
+// declaring an array to const means that you can not assign another array (whole) to this but you can do some manipulation (insertion..etc)
+const items = ["Buy Food", "Cook Food", "Eat Food"];
+const workItem = [];
 
 // set function is used to include ejs template files in our javascript code.
 app.set('view engine', 'ejs');
@@ -27,21 +29,8 @@ app.use(express.static("public"));
 
 // get function is used to send GET request to server. so that it render some file (HTML or EJS) to our Path or Route that is "/" in this condition.
 app.get("/", function(req, res) {
-  // Date() function is used to fetch today date according to local date
-  let date = new Date();
-  // option object is used for some date dependent functions.
-  let option = {
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-    year: "numeric"
-  };
-
-// toLocaleDateString() function is used to send date in some format.
-// "en-US is used for define the format of locality (en-US == english-United state)"
-// in this function option object is used to send the date data and en-US define the format.
-  let day = date.toLocaleDateString("en-US", option);
 // render function render date to appropriate ejs file(in this case LISTS), and pass data along with define variables.
+  const day = date.getDay();
   res.render('lists', {
     listTitle: day,
     todo_Data: items
@@ -51,8 +40,8 @@ app.get("/", function(req, res) {
 // post method is used to send the data back when the post route is triggered by appropriate HTML
 app.post("/", function(req, res) {
   // item variable contain some data that is parsed by bodyParser of some HTML element
-  let item = req.body.Todo_Item;
-  let checkData = checkValue(item);
+  const item = req.body.Todo_Item;
+  const checkData = date.checkValue(item);
   if (req.body.button === "Work") {
     if(!checkData){
       workItem.push(item);
@@ -67,29 +56,22 @@ app.post("/", function(req, res) {
   }
 });
 
-// this function checks value according to the input value
-function checkValue(item){
-  let count = 0;
-  let size = item.length;
-  for (let i = 0; i < size; i++) {
-    if (item[i] == " ") {
-      count = count + 1;
-    }
-  }
-  return Boolean(size == count);
-}
+
+app.post("/del",(req, res) =>{
+
+});
 
 // this is another Get route to render some html or ejs template to some http address
 app.get("/work", (req, res) => {
   res.render("lists", {
     listTitle: "Work",
     todo_Data: workItem
-  })
+  });
 });
 
 app.get("/about", (req, res) => {
   res.render("about");
-})
+});
 
 // listen funtion is used to set the path(in this the address of local port, in this case 3000)
 app.listen("3000", () => {
