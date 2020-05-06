@@ -1,0 +1,28 @@
+<!-- This include function is used to include the header.ejs template in our code -->
+<%- include("header") -%>
+
+<div class="box" id="heading">
+  <h1> <%=listTitle%> </h1>
+</div>
+
+<!-- creates a list for todo  -->
+<div class="box">
+  <!-- <li>Buy Food</li>
+      <li>Cook Food</li>
+      <li>Eat Food</li> -->
+<!-- here same code is used for making more list items with single list using java script code in background.-->
+  <% for (var i = 0; i < todo_Data.length; i++){ %>
+  <div class="item">
+    <input type="checkbox">
+    <p> <%= todo_Data[i] %></p>
+  </div>
+  <% } %>
+
+  <form class="item" action="/" method="post">
+    <input type="text" name="Todo_Item" placeholder="New Item" autocomplete="off" autofocus>
+    <button type="submit" name="button" value=<%= listTitle %>>+</button>
+  </form>
+</div>
+
+<!-- This is same as header which adds default footer from footer.ejs file to this page -->
+<%- include("footer") -%>
