@@ -13,15 +13,18 @@
       <li>Cook Food</li>
       <li>Eat Food</li> -->
 <!-- here same code is used for making more list items with single list using java script code in background.-->
-  <% for (var i = 0; i < todo_Data.length; i++){ %>
-    <div class="item content">
-      <form action="/del" method="post" style="display:flex;">
-        <input type="checkbox" class="cbox">
-        <p name="text"><%= todo_Data[i] %></p>
-        <button class="crossbutton" type="submit" name="delete" value=<%= listTitle %>>×</button>
-      </form>
-    </div>
-    <%} %>
+     <% todo_Data.forEach((item)=>{ %>
+      <div class="item content">
+        <form action="/del" method="post" style="display:flex;">
+        <!-- we can remove button tag and make the list deleted when the checkbox get checked by adding this attribute in checkbox
+        <p onChange="this.form.submit()">, by using this way u can remove button -->
+        <input type="checkbox" onChange="this.form.submit()" class="cbox" name="checkedBox" value="<%= item._id %>">
+        <p ondblclick="this.contentEditable='true'" onblur="this.contentEditable='false'" name="text"><%= item.name %></p>
+        <input type="hidden" width=0 name="hPageName" value="<%= listTitle %>"></input>
+          <!-- <button class="crossbutton" type="submit" name="delete" value="[<%= listTitle %>, <%=item._id %>]">×</button> -->
+        </form>
+      </div>
+    <%}); %>
   <!-- <button type="submit" name="check_button" class="crossbutton" value=<%= listTitle %>></button> -->
   <form class="item" action="/" method="post">
     <input type="text" name="Todo_Item" placeholder="New Item" autocomplete="off" autofocus>

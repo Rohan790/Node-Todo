@@ -32,7 +32,7 @@
    let count = 0;
    const size = item.length;
    for (let i = 0; i < size; i++) {
-     if (item[i] == " ") {
+     if (item[i] === " ") {
        count = count + 1;
      }
    }
